@@ -14,7 +14,7 @@ const Parent = () => {
     },[])
     return (
         <div>
-            <h1>Consistent-Student</h1>
+            <h1 className="text-3xl font-bold">Consistent-Student</h1>
             <AllSubjects
             subjects={subjects}
             ></AllSubjects>

@@ -6,7 +6,7 @@ const AllSubjects = ({subjects}) => {
     
     return (
         <div>
-            <h3>Select Subject For Study From Here!</h3>
+            <h3 className="text-xl font-semibold">Select Subject For Study From Here!</h3>
             <div>
                 {
                     subjects.map(subject=><SingleSubject
