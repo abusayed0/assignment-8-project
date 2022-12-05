@@ -2,7 +2,7 @@ import React from 'react';
 import SingleSubject from '../SingleSubject/SingleSubject';
 
 import './AllSubjects.css'
-const AllSubjects = ({subjects}) => {
+const AllSubjects = ({subjects,addToList}) => {
     
     return (
         <div>
@@ -12,6 +12,7 @@ const AllSubjects = ({subjects}) => {
                     subjects.map(subject=><SingleSubject
                     key={subject.id}
                     subject={subject}
+                    addToList={addToList}
                     ></SingleSubject>)
                 }
             </div>
