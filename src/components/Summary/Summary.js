@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Summary.css'
 
 const Summary = ({addedSubjects}) => {
     const totalTime=addedSubjects.reduce((previousTotal,currentSub)=>previousTotal+currentSub.readingTime,0)
+    const [breakTime,setBreakTime]=useState(0);
+    const addBreak=(event)=>{
+        if(event.target.type==="button"){
+            setBreakTime(event.target.value)
+        }
+    }
     return (
         <div className="bg-base-100 shadow-xl px-5">
             <div className="mt-10 sticky top-10">
@@ -35,7 +41,7 @@ const Summary = ({addedSubjects}) => {
                 {/* add break start */}
                 <div className="mt-10">
                     <h1>Add A Break</h1>
-                    <div className="flex justify-around mt-4 bg-violet-300 py-3 rounded ">
+                    <div onClick={(event)=>addBreak(event)} className="flex justify-around mt-4 bg-violet-300 py-3 rounded ">
 
                         <button type="button" value="5" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-800">5 min</button>
                         <button type="button" value="10" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-800">10 min</button>
@@ -53,7 +59,7 @@ const Summary = ({addedSubjects}) => {
                     </div>
                     <div className="mt-3 flex justify-around py-3 bg-violet-300 rounded">
                         <h2>Break Time</h2>
-                        <p>5 min</p>
+                        <p>{breakTime} min</p>
                     </div>
                 </div>
                 {/* target complete btn  */}

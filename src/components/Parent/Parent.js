@@ -14,7 +14,7 @@ const Parent = () => {
     // event handler for add to list btn 
     const addToList=(subject)=>{
             const previouslyAdded=addedSubjects.find(everySub=>everySub.id===subject.id);
-            console.log(previouslyAdded)
+            // console.log(previouslyAdded)
             if(!previouslyAdded){
                 subject.isAdded=true;
                 const newAllAddedSub=[...addedSubjects,subject]
