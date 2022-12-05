@@ -15,7 +15,7 @@ const Parent = () => {
     }, [])
     return (
         <div className="w-10/12 mx-auto grid grid-cols-3 gap-8">
-            <div className="col-span-2">
+            <div className="col-span-2 mt-14">
                 <h1 className="text-3xl font-bold">Consistent-Student</h1>
                 <AllSubjects
                     subjects={subjects}
