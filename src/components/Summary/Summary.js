@@ -1,7 +1,8 @@
 import React from 'react';
 import './Summary.css'
 
-const Summary = () => {
+const Summary = ({addedSubjects}) => {
+    const totalTime=addedSubjects.reduce((previousTotal,currentSub)=>previousTotal+currentSub.readingTime,0)
     return (
         <div className="bg-base-100 shadow-xl px-5">
             <div className="mt-10 sticky top-10">
@@ -48,7 +49,7 @@ const Summary = () => {
                     <h3>Today Study's Summary</h3>
                     <div className="mt-4 flex justify-around py-3 bg-violet-300 rounded">
                         <h2>Total Study Time</h2>
-                        <p>100 min</p>
+                        <p>{totalTime} min</p>
                     </div>
                     <div className="mt-3 flex justify-around py-3 bg-violet-300 rounded">
                         <h2>Break Time</h2>

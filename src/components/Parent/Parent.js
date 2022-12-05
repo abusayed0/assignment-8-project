@@ -37,7 +37,10 @@ const Parent = () => {
                     addToList={addToList}
                 ></AllSubjects>
             </div>
-            <Summary></Summary>
+            <Summary
+            addedSubjects={addedSubjects}
+            >
+            </Summary>
         </div>
     );
 };
