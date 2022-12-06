@@ -40,6 +40,20 @@ const Parent = () => {
             .then(res => res.json())
             .then(data => setSubjects(data))
     }, [])
+
+    // effect for display local storage saved subject when reload the page 
+    useEffect(()=>{
+        const getAddedSubFromLs=getLSData("saved-subjects")
+        let previousAddedSub=[]
+        for (const subId in getAddedSubFromLs) {
+            // console.log(subId)
+            const getAddedSub=subjects.find(sub=>sub.id===subId)
+            if(getAddedSub){
+            getAddedSub.isAdded=true;
+            previousAddedSub.push(getAddedSub)}
+        }
+        setAddedSubjects(previousAddedSub)
+    },[subjects])
     return (
         <div className="w-10/12 mx-auto grid grid-cols-3 gap-8">
             <div className="col-span-2 mt-14">
