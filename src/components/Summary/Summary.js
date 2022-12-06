@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './Summary.css'
 
-const Summary = ({addedSubjects,breakTime,addBreak}) => {
-    const totalTime=addedSubjects.reduce((previousTotal,currentSub)=>previousTotal+currentSub.readingTime,0)
+const Summary = ({totalTime,breakTime,addBreak,targetCompleted}) => {
+    
     
     return (
-        <div className="bg-base-100 shadow-xl px-5">
-            <div className="mt-10 sticky top-10">
+        <div className="card bg-base-100 shadow-xl px-5">
+            <div className="mt-10 sticky top-10 mb-3">
                 {/* img and address start */}
                 <div className="flex">
                     <div className="avatar mr-3">
@@ -35,7 +35,7 @@ const Summary = ({addedSubjects,breakTime,addBreak}) => {
                 </div>
                 {/* add break start */}
                 <div className="mt-10">
-                    <h1>Add A Break</h1>
+                    <h1 className="text-xl">Add A Break</h1>
                     <div onClick={(event)=>addBreak(event)} className="flex justify-around mt-4 bg-violet-300 py-3 rounded ">
 
                         <button type="button" value="5" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-800">5 min</button>
@@ -47,7 +47,7 @@ const Summary = ({addedSubjects,breakTime,addBreak}) => {
                 </div>
                 {/* study summary start  */}
                 <div className="mt-10">
-                    <h3>Today Study's Summary</h3>
+                    <h3 className="text-xl">Today Study's Summary</h3>
                     <div className="mt-4 flex justify-around py-3 bg-violet-300 rounded">
                         <h2>Total Study Time</h2>
                         <p>{totalTime} min</p>
@@ -59,7 +59,7 @@ const Summary = ({addedSubjects,breakTime,addBreak}) => {
                 </div>
                 {/* target complete btn  */}
                 <div className="card-actions mt-10">
-                    <button className="btn btn-primary w-full">Target Completed</button>
+                    <button onClick={targetCompleted} className="btn btn-primary w-full">Target Completed</button>
                 </div>
 
             </div>
