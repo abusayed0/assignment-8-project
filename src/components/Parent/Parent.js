@@ -1,5 +1,6 @@
 import { handler } from 'daisyui';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import AllSubjects from '../AllSubject/AllSubjects';
 import PastActivity from '../PastActivity/PastActivity';
 import Summary from '../Summary/Summary';
@@ -39,8 +40,10 @@ const Parent = () => {
     }
     // event handler for target complete btn 
     const targetCompleted = () => {
-        // console.log(addedSubjects.length)
         if (addedSubjects.length > 0) {
+            Swal.fire(
+                "Congratulation!! you succesfully completed your target."
+              )
             localStorage.removeItem("saved-subjects");
             localStorage.removeItem("break-time");
             setIsCompleted(!isCompleted)
@@ -60,7 +63,11 @@ const Parent = () => {
             }
            
         }
-        // console.log(pastActivity)
+        else{
+            Swal.fire(
+                "Opps!! you did't set any target."
+              )
+        }
     }
     // effect for load data from server 
     useEffect(() => {
@@ -68,6 +75,8 @@ const Parent = () => {
             .then(res => res.json())
             .then(data => setSubjects(data))
     }, [isCompleted])
+
+    // get total from added subject 
     const totalTime=addedSubjects.reduce((previousTotal,currentSub)=>previousTotal+currentSub.readingTime,0);
     // effect for display local storage saved subject when reload the page 
     useEffect(() => {
@@ -90,7 +99,8 @@ const Parent = () => {
         const previousBreak = getLSData("break-time").break;
         // console.log(previousBreak)
         if (previousBreak) {
-            setBreakTime(previousBreak.break)
+            console.log("if")
+            setBreakTime(previousBreak)
         }
         else{
             setBreakTime(0)

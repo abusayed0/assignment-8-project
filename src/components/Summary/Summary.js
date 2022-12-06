@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Summary.css'
 
 const Summary = ({totalTime,breakTime,addBreak,targetCompleted}) => {
-    
+    // console.log(breakTime)
     
     return (
         <div className="card bg-base-100 shadow-xl px-5">
