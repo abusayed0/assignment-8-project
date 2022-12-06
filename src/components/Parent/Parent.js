@@ -54,6 +54,14 @@ const Parent = () => {
         }
         setAddedSubjects(previousAddedSub)
     },[subjects])
+
+    // display previous added break time for localStorage when reload the page 
+    useEffect(()=>{
+        const previousBreak=getLSData("break-time")
+        if(previousBreak.break){
+            setBreakTime(previousBreak.break)
+        }
+    },[])
     return (
         <div className="w-10/12 mx-auto grid grid-cols-3 gap-8">
             <div className="col-span-2 mt-14">
