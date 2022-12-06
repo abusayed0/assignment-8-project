@@ -2,6 +2,7 @@ import { handler } from 'daisyui';
 import React, { useEffect, useState } from 'react';
 import AllSubjects from '../AllSubject/AllSubjects';
 import Summary from '../Summary/Summary';
+import { getLSData, saveBreakInLS, saveSubInLS } from '../utilities/utilities';
 import './Parent.css'
 
 const Parent = () => {
@@ -10,6 +11,8 @@ const Parent = () => {
     
     // state for added subject 
     const [addedSubjects,setAddedSubjects]=useState([]);
+    // state for break time
+    const [breakTime,setBreakTime]=useState(0);
 
     // event handler for add to list btn 
     const addToList=(subject)=>{
@@ -19,9 +22,18 @@ const Parent = () => {
                 subject.isAdded=true;
                 const newAllAddedSub=[...addedSubjects,subject]
                 setAddedSubjects(newAllAddedSub)
+                // add added subject in localStorage
+                saveSubInLS("saved-subjects",subject.id)
             }
     }
-
+    // event handler for break btn 
+    const addBreak=(event)=>{
+        if(event.target.type==="button"){
+            setBreakTime(event.target.value)
+            // set break time in localStorage
+            saveBreakInLS("break-time",event.target.value)
+        }
+    }
     // effect for load data from server 
     useEffect(() => {
         fetch("data-server/dataServer.json")
@@ -39,6 +51,8 @@ const Parent = () => {
             </div>
             <Summary
             addedSubjects={addedSubjects}
+            addBreak={addBreak}
+            breakTime={breakTime}
             >
             </Summary>
         </div>

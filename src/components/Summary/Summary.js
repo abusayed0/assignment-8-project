@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import './Summary.css'
 
-const Summary = ({addedSubjects}) => {
+const Summary = ({addedSubjects,breakTime,addBreak}) => {
     const totalTime=addedSubjects.reduce((previousTotal,currentSub)=>previousTotal+currentSub.readingTime,0)
-    const [breakTime,setBreakTime]=useState(0);
-    const addBreak=(event)=>{
-        if(event.target.type==="button"){
-            setBreakTime(event.target.value)
-        }
-    }
+    
     return (
         <div className="bg-base-100 shadow-xl px-5">
             <div className="mt-10 sticky top-10">
