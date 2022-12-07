@@ -38,10 +38,10 @@ const Summary = ({totalTime,breakTime,addBreak,targetCompleted}) => {
                     <h1 className="text-xl">Add A Break</h1>
                     <div onClick={(event)=>addBreak(event)} className="flex justify-around mt-4 bg-violet-300 py-3 rounded ">
 
-                        <button type="button" value="5" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-800">5 min</button>
-                        <button type="button" value="10" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-800">10 min</button>
-                        <button type="button" value="15" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-800">15 min</button>
-                        <button type="button" value="20" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-800">20 min</button>
+                        <button type="button" value="5" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-600">5 min</button>
+                        <button type="button" value="10" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-600">10 min</button>
+                        <button type="button" value="15" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-600">15 min</button>
+                        <button type="button" value="20" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-600">20 min</button>
                     </div>
 
                 </div>

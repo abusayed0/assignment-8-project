@@ -2,18 +2,25 @@ import React from 'react';
 import SingleActivity from '../SingleActivity/SingleActivity';
 import './PastActivity.css'
 const PastActivity = ({pastActivity}) => {
-    return (
-        <div className="mt-16">
-            <h2 className="text-xl font-semibold">Last 10 Time Study's Record</h2>
-            <div className="mt-4 grid grid-cols-3 gap-5">
-                {
-                    pastActivity.map(activity=><SingleActivity
-                    activity={activity}
-                    ></SingleActivity>)
-                }
+    if(pastActivity.length>0){
+        return (
+             
+                <div className="mt-4 grid grid-cols-3 gap-5">
+                    {
+                        pastActivity.map(activity=><SingleActivity
+                        activity={activity}
+                        ></SingleActivity>)
+                    }
+                </div>
+        );
+    }
+    else{
+        return (
+            <div className=" mt-4 card bg-base-100 shadow-xl p-5">
+                <p className="text-xl">No data found.</p>
             </div>
-        </div>
-    );
+        )
+    }
 };
 
 export default PastActivity;
