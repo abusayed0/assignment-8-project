@@ -32,17 +32,26 @@ const saveActivityInLs=(name,value)=>{
         activity=[]
     }
     if(activity.length > 9){
-        activity.shift();
+        activity.pop();
     }
-    const newAllActivity=[...activity,value]
+    const newAllActivity=[value,...activity]
 
     localStorage.setItem(name,JSON.stringify(newAllActivity))
 
+}
+const randomId=(name)=>{
+    let radom=Math.random();
+    const check=name.find(previous=>previous.id===radom);
+    if(check){
+        radom=randomId(name);
+    }
+    return radom;
 }
 
 export {
     getLSData,
     saveSubInLS,
     saveBreakInLS,
-    saveActivityInLs
+    saveActivityInLs,
+    randomId,
 }

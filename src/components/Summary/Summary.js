@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Summary.css'
 
-const Summary = ({totalTime,breakTime,addBreak,targetCompleted}) => {
-    // console.log(breakTime)
-    
+const Summary = ({ totalTime, breakTime, addBreak, targetCompleted }) => {
+
     return (
-        <div className="card bg-base-100 shadow-xl px-5">
-            <div className="mt-10 sticky top-10 mb-3">
+        <div className="card bg-base-100 shadow-xl p-5">
+            <div className="static md:sticky md:top-5">
                 {/* img and address start */}
                 <div className="flex">
                     <div className="avatar mr-3">
@@ -18,7 +19,10 @@ const Summary = ({totalTime,breakTime,addBreak,targetCompleted}) => {
                     <div>
                         <div>
                             <h1>Peter Parker</h1>
-                            <p>Dhaka,Bangledesh</p>
+                            <div className="flex items-center">
+                                <FontAwesomeIcon icon={faLocationDot} className="text-xl"/>
+                                <p className="ml-2">Dhaka,Bangledesh</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -36,12 +40,12 @@ const Summary = ({totalTime,breakTime,addBreak,targetCompleted}) => {
                 {/* add break start */}
                 <div className="mt-10">
                     <h1 className="text-xl">Add A Break</h1>
-                    <div onClick={(event)=>addBreak(event)} className="flex justify-around mt-4 bg-violet-300 py-3 rounded ">
+                    <div onClick={(event) => addBreak(event)} className="flex justify-around mt-4 bg-violet-300 py-3 rounded ">
 
-                        <button type="button" value="5" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-600">5 min</button>
-                        <button type="button" value="10" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-600">10 min</button>
-                        <button type="button" value="15" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-600">15 min</button>
-                        <button type="button" value="20" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-blue-600">20 min</button>
+                        <button type="button" value="5" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-primary">5 min</button>
+                        <button type="button" value="10" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-primary">10 min</button>
+                        <button type="button" value="15" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-primary">15 min</button>
+                        <button type="button" value="20" className="px-2 py-3 rounded-full text-black hover:text-white border-0 bg-white hover:bg-primary">20 min</button>
                     </div>
 
                 </div>

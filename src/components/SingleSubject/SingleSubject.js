@@ -9,7 +9,7 @@ const SingleSubject = ({ subject ,addToList}) => {
             <div className="card-body">
                 <h2 className="card-title">{subjectName}</h2>
                 <p>{instruction}</p>
-                <h4>Reading Time : {readingTime}</h4>
+                <h4>Studying Time : {readingTime} min</h4>
                 <div className="card-actions">
                     <button onClick={()=>addToList(subject)} className="btn btn-primary w-full">{!isAdded?"Add To List":"Added"}</button>
                 </div>

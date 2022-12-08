@@ -1,12 +1,12 @@
-// import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handler } from 'daisyui';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import AllSubjects from '../AllSubject/AllSubjects';
 import PastActivity from '../PastActivity/PastActivity';
 import Summary from '../Summary/Summary';
-import { getLSData, saveActivityInLs, saveBreakInLS, saveSubInLS } from '../utilities/utilities';
+import { getLSData, randomId, saveActivityInLs, saveBreakInLS, saveSubInLS } from '../utilities/utilities';
 import './Parent.css'
 
 const Parent = () => {
@@ -19,12 +19,6 @@ const Parent = () => {
 
     // state for set break time
     const [breakTime, setBreakTime] = useState(0);
-
-    // state for complete target 
-    const [isCompleted, setIsCompleted] = useState(false);
-
-    // state for set tatal time 
-    const [totalTime, setTotalTime] = useState(0);
 
     // state for set past activity 
     const [pastActivity, setPastActivity] = useState([]);
@@ -59,24 +53,34 @@ const Parent = () => {
             )
             localStorage.removeItem("saved-subjects");
             localStorage.removeItem("break-time");
-            setIsCompleted(!isCompleted)
+            setAddedSubjects([])
+            setBreakTime(0)
+            const getAllSubjects = subjects;
+            getAllSubjects.forEach(sub => {
+                if (sub.isAdded) {
+                    sub.isAdded = false;
+                }
+            })
+
+            const id = randomId(pastActivity);
             const newActivity = {
                 totalTime,
-                breakTime
+                breakTime,
+                id,
             }
             let previousActivity = [...pastActivity];
             setPastActivity([...pastActivity, newActivity])
             if (previousActivity.length > 9) {
-                previousActivity.shift();
+                previousActivity.pop();
             }
-            setPastActivity([...previousActivity, newActivity]);
+            setPastActivity([newActivity, ...previousActivity]);
             // // saved past activity on local storage 
             saveActivityInLs("past-activity", newActivity);
             // console.log(pastActivity);
         }
         else {
             Swal.fire(
-                "Opps!! you did't set any target."
+                "Opps!! you did't set any target.please add atleast one subject."
             )
         }
     };
@@ -86,7 +90,7 @@ const Parent = () => {
         fetch("data-server/dataServer.json")
             .then(res => res.json())
             .then(data => setSubjects(data))
-    }, [isCompleted])
+    }, [])
 
 
     // effect for display local storage saved subject when reload the page 
@@ -103,21 +107,18 @@ const Parent = () => {
         }
 
         setAddedSubjects(previousAddedSub)
-    }, [subjects, isCompleted])
+    }, [subjects])
 
     // display previous added break time from localStorage when reload the page 
     useEffect(() => {
         const previousBreak = getLSData("break-time").break;
         // console.log(previousBreak)
         if (previousBreak) {
-            console.log("if")
             setBreakTime(previousBreak)
         }
-        else {
-            setBreakTime(0)
-        }
-    }, [isCompleted])
-    
+        
+    }, [])
+
 
     // useEffect for display previous activity 
     useEffect(() => {
@@ -130,18 +131,17 @@ const Parent = () => {
         }
     }, [])
 
-    // useEffect for set total time 
-    useEffect(() => {
-        const total = addedSubjects.reduce((previousTotal, currentSub) => previousTotal + currentSub.readingTime, 0);
-        setTotalTime(total)
-    }, [addedSubjects])
+    // calculate total time 
+    const totalTime = addedSubjects.reduce((previousTotal, currentSub) => previousTotal + currentSub.readingTime, 0);
 
     return (
         <div >
-            <div className="grid grid-cols-3 gap-8">
-                <div className="col-span-2 mt-14">
-                {/* <FontAwesomeIcon icon={faBookOpenReader} /> */}
-                    <h1 className="text-3xl font-bold text-blue-600">Acitve-Student</h1>
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                <div className="col-span-1 xl:col-span-2 mt-8 xl:mt-14">
+                    <div className="flex items-center">
+                        <FontAwesomeIcon icon={faBookOpenReader} className="text-primary text-4xl" />
+                        <h1 className="text-2xl md:text-3xl font-bold text-primary ml-2">Acitve-Student</h1>
+                    </div>
                     <AllSubjects
                         subjects={subjects}
                         addToList={addToList}
@@ -156,7 +156,7 @@ const Parent = () => {
                 </Summary>
             </div>
             <div className="mt-16">
-                <h2 className="text-xl font-semibold border-b-2 border-stone-600">Last 10 Time Study's Record</h2>
+                <h2 className="text-xl font-semibold border-b-2 border-stone-600">Study's Record (Max Last 10 Time's)</h2>
                 <PastActivity
                     pastActivity={pastActivity}
                 >
